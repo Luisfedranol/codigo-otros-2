@@ -30,48 +30,34 @@ if (nombre.length > 0
   }
 }
 
-var botonBorrar = document.createElement("button")
-botonBorrar.textContent = "Eliminar invitado"
-botonBorrar.id = "boton-borrar"
-var corteLinea = document.createElement("br")
-document.body.appendChild(corteLinea)
-document.body.appendChild(botonBorrar);
+// var botonBorrar = document.createElement("button")
+// botonBorrar.textContent = "Eliminar invitado"
+// botonBorrar.id = "boton-borrar"
+// var corteLinea = document.createElement("br")
+// document.body.appendChild(corteLinea)
+// document.body.appendChild(botonBorrar);
 
 function agregarInvitado(nombre, edad, nacionalidad) {
 
-  if (nacionalidad === "ar") {
-    nacionalidad = "Argentina"
-  }
-  else if (nacionalidad === "mx") {
-    nacionalidad = "Mexicana"
-  }
-  else if (nacionalidad === "vnzl") {
-    nacionalidad = "Venezolana"
-  }
-  else if (nacionalidad === "per") {
-    nacionalidad = "Peruana"
-  }
+  var nacionalidades = {
+    "ar": "Argentina",
+    "mx": "Mexicana",
+    "vnzl": "Venezolana",
+    "per": "Peruana"
+  } // Se crea objeto nacionalidades
+
+nacionalidad = nacionalidades[nacionalidad] //Se utiliza el objeto para seleccionar la nacionalidad
 
 var lista = document.getElementById("lista-de-invitados")
 
 var elementoLista = document.createElement("div")
-elementoLista.classList.added("elemento-lista")
-lista.appendChild(elementoLista)
-
-var spanNombre = document.createElement("span")
-var inputNombre = document.createElement("input")
-var espacio = document.createElement("br")
-spanNombre.textContent = "Nombre: "
-inputNombre.value = nombre 
-elementoLista.appendChild(spanNombre)
-elementoLista.appendChild(inputNombre)
-elementoLista.appendChild(espacio)
+elementoLista.classList.add("elemento-lista") // Corrección de added por add
 
 function crearElemento(descripcion, valor) {
 var spanNombre = document.createElement("span")
 var inputNombre = document.createElement("input")
 var espacio = document.createElement("br")
-spanNombre.textContent = descripcion + ": "
+spanNombre.textContent = descripcion + ": ";
 inputNombre.value = valor 
 elementoLista.appendChild(spanNombre)
 elementoLista.appendChild(inputNombre)
@@ -87,11 +73,11 @@ var botonBorrar = document.createElement("button")
 botonBorrar.textContent = "Eliminar invitado"
 botonBorrar.id = "boton-borrar"
 var corteLinea = document.createElement("br")
-elementoLista.appendChild(corteLinea)
 elementoLista.appendChild(botonBorrar);
 
- botonBorrar.onclick = function() {
-// this.parentNode.style.display = 'none';
-botonBorrar.parentNode.remove()
-  }
+botonBorrar.onclick = function() {
+  elementoLista.remove(); // Uso de remove para eliminar el nodo
+};
+
+lista.appendChild(elementoLista); // Se añade a la lista
 }
